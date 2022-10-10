@@ -10,11 +10,10 @@
   - name: Install K3S
     shell:
       cmd: /tmp/install-k3s.sh --docker
-      args:
-        executable: /bin/bash
+      executable: /bin/bash
 
   - name: Give Docker ownership of k3s config
     file:
       path: /etc/rancher/k3s/k3s.yaml
-      owner: docker
+      group: docker
       mode: g+r
