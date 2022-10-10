@@ -1,0 +1,7 @@
+---
+  
+  - name: Update all packages
+    apt:
+      name: '*'
+      state: latest
+    notify: Reboot Host

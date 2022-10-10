@@ -1,0 +1,11 @@
+all:
+  children:
+    master:
+      hosts:
+        opi-k3s-master:
+    nodes:
+      hosts:
+        opi-k3s-node1:
+        opi-k3s-node2:
+        opi-k3s-node3:
+        opi-k3s-node4:

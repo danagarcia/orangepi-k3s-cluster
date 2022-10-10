@@ -1,0 +1,11 @@
+---
+
+  - name: Add master to host file
+    lineinfile:
+      path: /etc/hosts
+      line: "{{ master_ip }} opi-k3s-master"
+      create: yes
+
+  - name: Install k3s agent
+    shell:
+      cmd: /tmp/install-k3s.sh --agent --server https://opi-k3s-master:6443  --token {{ node_token | mandatory }} --docker
