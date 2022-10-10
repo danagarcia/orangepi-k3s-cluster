@@ -6,10 +6,6 @@
       line: "{{ master_ip }} opi-k3s-master"
       create: yes
 
-  - name: Debug install k3s agent
-    debug:
-      msg: "K3S_URL=https://opi-k3s-master:6443 K3S_TOKEN={{ node_token | mandatory }} /tmp/install-k3s.sh agent --docker"
-
   - name: Install k3s agent
     shell:
       cmd: "K3S_URL=https://opi-k3s-master:6443 K3S_TOKEN={{ node_token | mandatory }} /tmp/install-k3s.sh agent --docker"
