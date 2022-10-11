@@ -1,0 +1,19 @@
+---
+
+- name: Add nodes to host file
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ item.ip }} {{ item.name }}"
+    create: true
+  loop: "{{ nodes }}"
+
+- name: Install K3S
+  ansible.builtin.shell:
+    cmd: /tmp/install-k3s.sh --docker
+    executable: /bin/bash
+
+- name: Give Docker ownership of k3s config
+  ansible.builtin.file:
+    path: /etc/rancher/k3s/k3s.yaml
+    group: docker
+    mode: g+r

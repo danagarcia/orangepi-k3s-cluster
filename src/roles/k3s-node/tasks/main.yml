@@ -1,0 +1,12 @@
+---
+
+- name: Add master to host file
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ master_ip }} opi-k3s-master"
+    create: true
+
+- name: Install k3s agent
+  ansible.builtin.shell:
+    cmd: "K3S_URL=https://opi-k3s-master:6443 K3S_TOKEN={{ node_token | mandatory }} /tmp/install-k3s.sh agent --docker"
+    executable: /bin/bash
