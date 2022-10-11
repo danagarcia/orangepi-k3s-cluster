@@ -2,7 +2,7 @@
 
 # Credit
 - name: Reboot Host
-  reboot:
+  ansible.builtin.reboot:
     msg: "Reboot initiated by Ansible"
     connection_timeout: 5
     reboot_timeout: 600

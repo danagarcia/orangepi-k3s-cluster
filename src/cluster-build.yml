@@ -1,18 +1,18 @@
 ---
 - name: Update all hosts
   hosts: all
-  become: yes
+  become: true
   strategy: free
-  roles: 
+  roles:
     - role: update-host
 
 - name: Setup cluster master
   hosts: master
-  become: yes
-  roles: 
+  become: true
+  roles:
     - role: k3s-master
       vars:
-        nodes: 
+        nodes:
           - name: opi-k3s-node1
             ip: "192.168.68.131"
           - name: opi-k3s-node2
@@ -24,18 +24,18 @@
 
 - name: Get cluster node token
   hosts: master
-  become: yes
+  become: true
   tasks:
     - name: Read and store node token
-      slurp:
+      ansible.builtin.slurp:
         src: /var/lib/rancher/k3s/server/node-token
       register: node_token
 
 - name: Setup nodes
   hosts: nodes
-  become: yes
+  become: true
   strategy: free
-  roles: 
+  roles:
     - role: k3s-node
       vars:
         master_ip: "192.168.68.130"
